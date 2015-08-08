@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema
+        xmlns="http://www.concrete5.org/doctrine-xml/0.5"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.concrete5.org/doctrine-xml/0.5 http://concrete5.github.io/doctrine-xml/doctrine-xml-0.5.xsd" version="0.3">
+
+    <table name="btFootballClub">
+        <field name="sID" type="I"><PRIMARY /><AUTOINCREMENT /><UNSIGNED /></field>
+        <field name="name" type="C" size="255"><NOTNULL /><default value="" /></field>
+        <field name="country" type="C" size="100"><NOTNULL/><default value=""/></field>
+        <field name="venue" type="C" size="100" />
+        <field name="coach" type="C" size="100" />
+        <field name="imageID" type="I" size="10" />
+        <field name="creation" type="C" size="4"><NOTNULL/><default value="0000" /> </field>
+        <field name="website" type="C" size="255" />
+        <index name="name"><UNIQUE/><col>name</col></index>
+        <constraint>
+            ADD FOREIGN KEY (imageID) REFERENCES Files(fID) ON DELETE CASCADE
+        </constraint>
+    </table>
+
+    <table name="btFootballLeague">
+        <field name="id" type="I"><PRIMARY/><AUTOINCREMENT/><unsigned/><NOTNULL/></field>,
+        <field name="name" type="C" size="100"><NOTNULL/><default value=""/></field>
+        <field name="year" type="T"><NOTNULL/><default value="1900-01-01 00:00:00"/></field>
+        <field name="pt_victory" type="I1"><UNSIGNED/><NOTNULL/><default value="3" /></field>
+        <field name="pt_draw" type="I1" ><UNSIGNED/><NOTNULL/><default value="1" /></field>
+        <field name="pt_defeat" type="I1" ><UNSIGNED/><NOTNULL/><default value="0" /></field>
+        <field name="promotion" type="I1" ><UNSIGNED/><NOTNULL/><default value="4" /></field>
+        <field name="qualifying" type="I1" ><UNSIGNED/><NOTNULL/><default value="2" /></field>
+        <field name="relegation" type="I1" ><UNSIGNED/><NOTNULL/><default value="3" /></field>
+        <!--<field name="id_favorite" type="I" ><UNSIGNED/><NOTNULL/><default value="0" /></field>-->
+        <field name="nb_leg" type="I1" ><NOTNULL/><default value="2" /></field>
+        <!--<field name="team_link" type="L"><NOTNULL/><default value="0" /></field>-->
+        <field name="default_time" type="T" ><NOTNULL/><default value="1900-01-01 00:00:00" /></field>
+        <!--<field name="nb_teams" type="I1" ><NOTNULL/><default value="0" /></field>-->
+        <!--<field name="player_mod" type="L"><NOTNULL/><default value="0" /></field>-->
+        <!--<field name="sport_type" type="C" size="50" ><NOTNULL/><default value="football" /></field>-->
+        <field name="nb_starter" type="I1" ><UNSIGNED/><NOTNULL/><default value="0" /></field>
+        <field name="nb_bench" type="I1" ><UNSIGNED/><NOTNULL/><default value="0" /></field>
+        <!--<field name="prediction_mod" type="L"><NOTNULL/><default value="0" /></field>-->
+        <!--<field name="point_right" type="I1" ><UNSIGNED/><NOTNULL/><default value="0" /></field>-->
+        <!--<field name="point_wrong" type="I1" ><UNSIGNED/><NOTNULL/><default value="0" /></field>-->
+        <!--<field name="point_part" type="I1" ><UNSIGNED/><NOTNULL/><default value="1" /></field>-->
+        <!--<field name="deadline" type="I1" ><UNSIGNED/><NOTNULL/><default value="1" /></field>-->
+    </table>
+
+    <table name="btFootballFixture">
+        <field name="id" type="I"><PRIMARY/><UNSIGNED/><AUTOINCREMENT/><NOTNULL/></field>
+        <field name="id_league" type="I"><UNSIGNED/></field>
+        <field name="number" type="I"><UNSIGNED/><NOTNULL/><default value="0" /></field>
+        <constraint>
+            ADD FOREIGN KEY (id_league) REFERENCES btFootballLeague(id) ON DELETE CASCADE
+        </constraint>
+    </table>
+
+
+    <table name="btFootballMatch">
+        <field name="id" type="I" ><KEY/><UNSIGNED/><NOTNULL/><AUTOINCREMENT/></field>
+        <field name="id_team_home" type="I" ><UNSIGNED/></field>
+        <field name="id_team_away" type="I" ><UNSIGNED/></field>
+        <field name="played" type="T"/>
+        <field name="id_fixture" type="I" ><UNSIGNED/></field>
+        <field name="goal_home" type="I1" ><UNSIGNED/></field>
+        <field name="goal_away" type="I1" ><UNSIGNED/></field>
+        <constraint>
+            ADD FOREIGN KEY (id_fixture) REFERENCES btFootballFixture(id) ON DELETE CASCADE
+        </constraint>
+        <constraint>
+            ADD FOREIGN KEY (id_team_away) REFERENCES btFootballTeam(id) ON DELETE CASCADE
+        </constraint>
+        <constraint>
+            ADD FOREIGN KEY (id_team_home) REFERENCES btFootballTeam(id) ON DELETE CASCADE
+        </constraint>
+    </table>
+
+    <table name="btFootballTableCache">
+        <field name="id" type="I"><PRIMARY/><UNSIGNED/><AUTOINCREMENT/><NOTNULL/></field>
+        <field name="club_name" type="C" size="255" />
+        <field name="points" type="I1" ><UNSIGNED></UNSIGNED></field>
+        <field name="played" type="I1" ><UNSIGNED></UNSIGNED></field>
+        <field name="victory" type="I1" ><UNSIGNED></UNSIGNED></field>
+        <field name="draw" type="I1" ><UNSIGNED></UNSIGNED></field>
+        <field name="defeat" type="I1" ><UNSIGNED></UNSIGNED></field>
+        <field name="goal_for" type="I1" ><UNSIGNED></UNSIGNED></field>
+        <field name="goal_against" type="I1" ><UNSIGNED></UNSIGNED></field>
+        <field name="diff" type="I1" ><UNSIGNED></UNSIGNED></field>
+        <field name="pen" type="I1" ><UNSIGNED></UNSIGNED></field>
+        <field name="home_points" type="I1" ><UNSIGNED></UNSIGNED></field>
+        <field name="home_played" type="I1" ><UNSIGNED></UNSIGNED></field>
+        <field name="home_v" type="I1" ><UNSIGNED></UNSIGNED></field>
+        <field name="home_d" type="I1" ><UNSIGNED></UNSIGNED></field>
+        <field name="home_l" type="I1" ><UNSIGNED></UNSIGNED></field>
+        <field name="home_g_for" type="I1" ><UNSIGNED></UNSIGNED></field>
+        <field name="home_g_against" type="I1" ><UNSIGNED></UNSIGNED></field>
+        <field name="home_diff" type="I1" ><UNSIGNED></UNSIGNED></field>
+        <field name="away_points" type="I1" ><UNSIGNED></UNSIGNED></field>
+        <field name="away_played" type="I1" ><UNSIGNED></UNSIGNED></field>
+        <field name="away_v" type="I1" ><UNSIGNED></UNSIGNED></field>
+        <field name="away_d" type="I1" ><UNSIGNED></UNSIGNED></field>
+        <field name="away_l" type="I1" ><UNSIGNED></UNSIGNED></field>
+        <field name="away_g_for" type="I1" ><UNSIGNED></UNSIGNED></field>
+        <field name="away_g_against" type="I1" ><UNSIGNED></UNSIGNED></field>
+        <field name="away_diff" type="I1" ><UNSIGNED></UNSIGNED></field>
+        <field name="id_team" type="I" ><UNSIGNED></UNSIGNED></field>
+        <field name="id_league" type="I" ><UNSIGNED></UNSIGNED></field>
+        <index name="id_league_index"><col>id_league</col></index>
+    </table>
+
+    <table name="btFootballTeam">
+        <field name="id" type="I2"><UNSIGNED/><NOTNULL/><AUTOINCREMENT/><KEY/></field>
+        <field name="id_league" type="I2"><UNSIGNED/><NOTNULL/><default value="0" /></field>
+        <field name="id_club" type="I2"><UNSIGNED/><NOTNULL/><default value="0" /></field>
+        <field name="penalty" type="I1"><NOTNULL/><default value="0" /></field>
+        <constraint>
+            ADD FOREIGN KEY (id_club) REFERENCES fbFootballClub(id) ON DELETE CASCADE
+        </constraint>
+        <constraint>
+            ADD FOREIGN KEY (id_league) REFERENCES fbFootballLeague(id) ON DELETE CASCADE
+        </constraint>
+    </table>
+
+    <table name="btFootballPlayer">
+        <field name="id" type="I"><UNSIGNED/><NOTNULL/><AUTOINCREMENT/><PRIMARY/></field>
+        <field name="firstname" type="C" size="100"><NOTNULL/><default value="" /></field>
+        <field name="lastname" type="C" size="100"><NOTNULL/><default value="" /></field>
+        <field name="description" type="X2"/>
+        <field name="birthdate" type="T" ><default value="1900-01-01 00:00:00"/></field>
+        <field name="weight" type="I1" ><UNSIGNED/><NOTNULL/><default value="0" /></field>
+        <field name="height" type="I1" ><UNSIGNED/><NOTNULL/><default value="0" /></field>
+        <field name="picture" type="C" size="255"><NOTNULL/><default value="" /></field>
+        <field name="id_country" type="I1" ><UNSIGNED/><NOTNULL/><default value="0" /></field>
+        <field name="id_term" type="I1"><UNSIGNED/><NOTNULL/><default value="0" /></field>
+
+    </table>
+
+    <table name="btFootballPlayerTeam">
+        <field name="id" type="I2" ><UNSIGNED/><NOTNULL/><AUTOINCREMENT/><KEY/>></field>
+        <field name="id_player" type="I2" ><UNSIGNED/><NOTNULL/><default value="0" /></field>
+        <field name="id_team" type="I2" > <UNSIGNED/><NOTNULL/><default value="0" /></field>
+        <field name="number" type="I1" > <UNSIGNED/><NOTNULL/><default value="0" /></field>
+        <field name="position" type="I1" > <UNSIGNED/><NOTNULL/><default value="0" /></field>
+        <constraint>
+            ADD FOREIGN KEY (id_player) REFERENCES fbFootballPlayer(id) ON DELETE CASCADE
+        </constraint>
+        <constraint>
+            ADD FOREIGN KEY (id_team) REFERENCES fbFootballTeam(id) ON DELETE CASCADE
+        </constraint>
+    </table>
+
+    <table name="btFootballPlayerData">
+        <field name="id_event" type="I1"><UNSIGNED/><NOTNULL/><default value="0" /></field>
+        <field name="id_player_team" type="I2"><UNSIGNED/><NOTNULL/><default value="0" /></field>
+        <field name="id_match" type="I2" ><UNSIGNED/><NOTNULL/><default value="0" /></field>
+        <field name="value" type="I1" ><UNSIGNED/><NOTNULL/><default value="0" /></field>
+        <constraint>
+            ADD KEY id_match (id_match)
+        </constraint>
+        <constraint>
+            ADD KEY id_event (id_event)
+        </constraint>
+        <constraint>
+            ADD KEY id_player_team (id_player_team)
+        </constraint>
+    </table>
+
+    <table name="btFootballTableChart">
+        <field name="id_team" type="I" ><UNSIGNED/><NOTNULL/><default value="0" /><KEY/></field>
+        <field name="fixture" type="I1" ><UNSIGNED/><NOTNULL/><default value="0" /></field>
+        <field name="ranking" type="I1" ><UNSIGNED/><NOTNULL/><default value="0" /></field>
+    </table>
+
+    <table name="btFootballTablePrediction">
+        <field name="id_league" type="I2" ><UNSIGNED/><NOTNULL/><default value="0" /></field>
+        <field name="id_member" type="I2" ><UNSIGNED/><NOTNULL/><default value="0" /></field>
+        <field name="points" type="I2" ><UNSIGNED/><NOTNULL/><default value="0" /></field>
+        <field name="participation" type="I2"><UNSIGNED/><NOTNULL/><default value="0" /></field>
+        <constraint>
+            ADD KEY id_league (id_league)
+        </constraint>
+        <constraint>
+            ADD KEY id_member (id_member)
+        </constraint>
+    </table>
+
+</schema>

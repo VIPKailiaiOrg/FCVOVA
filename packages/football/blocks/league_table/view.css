@@ -1,0 +1,39 @@
+div.league-table table.league-table{width:100%}
+table.league-table span.ccm-search-results-checkbox{display:block;padding-top:0px;padding-bottom:0px;margin-left:75px}
+table.league-table thead th{background-color:#d92725; color:#ffffff;font-weight:300; border:  1px solid #d92725;}
+table.league-table thead th input[type=checkbox],table.league-table thead th input[type=radio]{border:1px solid #ccc;color:#ccc;vertical-align:middle}
+table.league-table thead a,table.league-table thead a{color:#eaeaea;background:#00496e;white-space:nowrap}
+table.league-table thead a:after,  table.league-table thead th.ccm-results-list-active-sort-asc a:after{vertical-align:middle;content:"";width:0;height:0;display:inline-block;margin-left:10px}
+table.league-table thead th.ccm-results-list-active-sort-desc a:after{border-width:4 px 4 px 0 px 4 px;border-style:solid;border-color:#e2e2e4 transparent transparent transparent}
+table.league-table thead th.ccm-results-list-active-sort-asc a:after{border-width:0 px 4 px 4 px 4 px;border-style:solid;border-color:transparent transparent #e2e2e4 transparent}
+table.league-table thead th a{color:#93bfd5;display:block;-webkit-transition:all .2s cubic-bezier(.19, 1, .22, 1);transition:all .2s cubic-bezier(.19, 1, .22, 1)}
+table.league-table thead th a:hover{text-decoration:none;background-color:#00517a;color:#eaeaea}
+table.league-table thead th a,table.league-table thead th span{padding:10px 10px 10px 10px;display:block}
+table.league-table thead th table.league-table thead th.ccm-file-manager-search-results-star span{padding-left:40px}
+table.league-table tbody  a{padding:10px 10px 10px 10px}
+table.league-table tbody td.favorite{font-weight: bold;}
+table.league-table tbody td{-webkit-transition:all .2s cubic-bezier(.19, 1, .22, 1);transition:all .2s cubic-bezier(.19, 1, .22, 1);padding:20px;color:#999;background-color:#fff}
+table.league-table tbody td {padding:8px 10px 8px 10px; border:  1px solid #ccc;}
+table.league-table tbody td input[type=checkbox],table.league-table tbody td input[type=radio]{border:1px solid #c0c0c0;background-color:#f8f8f8;color:#00689c;position:relative;z-index:550}
+table.league-table tbody {width:300px}
+table.league-table tbody tr.ccm-menu-item-hover td,table.league-table tbody tr.ccm-menu-item-active td{background-color:#B8E4F8 !important;color:#000}
+table.league-table tbody tr:nth-child(even) td{background-color:#eee}
+table.league-table tbody tr.ccm-search-select-hover td{cursor:pointer;background-color:#B8E4F8 !important;color:#000}
+div.league-table
+@media (max-width:1199px)
+{
+    .ccm-ui table.league-table thead tr th,
+    .ccm-ui table.league-table tbody tr td{padding-left:2px;padding-right:2px}
+    .ccm-ui table.league-table thead tr th span,
+    .ccm-ui table.league-table tbody tr td span,
+    .ccm-ui table.league-table thead tr th a,
+    .ccm-ui table.league-table tbody tr td a{padding-left:8px;padding-right:8px}
+}
+
+@media (max-width:767px)
+{
+    .ccm-ui form.ccm-search-fields ul.ccm-search-form-advanced{top:0;width:130px}
+    .ccm-ui form.ccm-search-fields div.ccm-search-fields-row div.ccm-search-field-content{padding-left:0px}
+    form.ccm-search-fields select.ccm-search-bulk-action,form.ccm-search-fields select.ccm-search-choose-field{display:block}
+    div.ccm-search-fields-row div.form-group label.control-label{display:block}
+}

@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<schema version="0.3">
+
+    <table name="btLeagueMatch">
+        <field name="bID" type="I"><KEY /><UNSIGNED /><AUTOINCREMENT/><NOTNULL/></field>
+        <field name="league_id" type="I" />
+        <field name="team_id" type="I" />
+        <field name="type" type="I" />
+    </table>
+
+</schema>
